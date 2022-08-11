@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {useState} from 'react';
 import {ToDoItem} from './types'
 
@@ -5,11 +6,7 @@ function CreateToDo(): JSX.Element {
     const [newTodo, setNewTodo] = useState<ToDoItem>({task: '', completed: false, creationDate: '', dueDate: ''});
     
     const handleSubmit = () => {
-        fetch("https://rosemelissa-todo.herokuapp.com/items", {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newTodo)
-        });
+        axios.post("http://localhost:4000/items", newTodo);
     }
 
     return(
