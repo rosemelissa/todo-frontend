@@ -9,7 +9,8 @@ Change from fetch to axios
 Sort out date formatting - possibly have calendar come up for choosing due date
 Remove initial 20 blank items
 Edit button - maybe use same form as make new NO because it needs to patch/put, not post
-Delet button
 Filtering (by duedate, overdue, completeted etc.)
 Make it so new todo form only appears when you click on a "+" button (and so newToDo box will need an x in the corner to close without making a new todo)
 CSS
+
+check app.post type in server - does it need to be DbItem or UseInputDBItem?
