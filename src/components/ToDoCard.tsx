@@ -1,6 +1,6 @@
 import axios from 'axios';
+import { useState } from 'react';
 import { FullToDoItem } from './types';
-import {useEffect, useState} from 'react';
 
 interface ToDoCardProps {
     todos: FullToDoItem[];
@@ -93,6 +93,11 @@ function ToDoCard({todos, setTodos, id, task, completed, creationDate, dueDate}:
                 <h1>{id}</h1>
                 <form onSubmit={handleUpdate}>
                     <input type="text" value={currentTodo.task} onChange={(e) => setCurrentTodo(prevState => ({...prevState, task: e.target.value}))}/>
+                    <label htmlFor="due-date">Due date:</label>
+                        <input type="date" id="due-date" name="due-date"
+                            value={currentTodo.dueDate}
+                            // min={Date.now()}
+                            onChange={(e) => setCurrentTodo(prevState => ({...prevState, dueDate: e.target.value}))}/>
                     <input type='submit' value='Update'/>
                 </form>
                 

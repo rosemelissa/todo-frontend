@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
+import CreateToDo from "./components/CreateToDo";
 import ToDoCard from "./components/ToDoCard";
-import CreateToDo from "./components/CreateToDo"
-import axios from "axios";
-import {FullToDoItem} from './components/types'
+import { FullToDoItem } from './components/types';
 
 function App(): JSX.Element {
   const [todos, setTodos] = useState<FullToDoItem[]>([])

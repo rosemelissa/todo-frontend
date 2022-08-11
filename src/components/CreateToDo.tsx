@@ -1,6 +1,5 @@
 import axios from 'axios';
-import {useState} from 'react';
-import {ToDoItem} from './types'
+import { useState } from 'react';
 
 interface ToDoInputs {
     task: string;
