@@ -83,7 +83,7 @@ function ToDoCard({todos, setTodos, id, task, completed, creationDate, dueDate}:
                 : <input type="checkbox" onClick={handleMakeComplete}/>}
                 <button type="button" onClick={handleDelete}>Delete</button>
                 <button type="button" onClick={() => setMode('edit')}>Edit</button>
-                <p>Created: {creationDate}</p>
+                <p>Created: {creationDate.slice(0, 10)}</p>
                 <p>Due: {dueDate}</p>
             </div>
         )
