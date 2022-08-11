@@ -7,7 +7,7 @@ interface ToDoInputs {
 }
 
 function CreateToDo(): JSX.Element {
-    const [newTodo, setNewTodo] = useState<ToDoInputs>({task: '', dueDate: ''});
+    const [newTodo, setNewTodo] = useState<ToDoInputs>({task: '', dueDate: new Date().toISOString().slice(0, 10)});
     
     const handleSubmit = () => {
         axios.post("http://localhost:4000/items", newTodo);
