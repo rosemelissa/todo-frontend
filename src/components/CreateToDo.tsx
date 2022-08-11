@@ -23,7 +23,7 @@ function CreateToDo(): JSX.Element {
         <label htmlFor="due-date">Due date:</label>
             <input type="date" id="due-date" name="due-date"
                 value={newTodo.dueDate}
-                // min={Date.now()}
+                min={new Date().toISOString().slice(0, 10)}
                 onChange={(e) => setNewTodo({task: newTodo.task, dueDate: e.target.value})}/>
         {/* <label>
             Due date:
