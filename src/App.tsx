@@ -12,10 +12,51 @@ function App(): JSX.Element {
     .then((jsonBody: FullToDoItem[]) => setTodos(jsonBody))
   }, [])
   
+function filterTodoList(method: string) {
+  let sortedTodoList: FullToDoItem[] = [...todos];
+  if (method === "default") {
+    sortedTodoList = todos.sort(function(a, b) {
+      const keyA = a.id;
+      const keyB = b.id;
+      if (keyA < keyB) return -1;
+      if (keyA > keyB) return 1;
+      return 0;
+    });
+  } else if (method === 'alphabetically') {
+    sortedTodoList = todos.sort(function(a, b) {
+      const keyA = a.task.toLowerCase();
+      const keyB = b.task.toLowerCase();
+      if (keyA < keyB) return -1;
+      if (keyA > keyB) return 1;
+      return 0;
+    });
+    } else if (method === 'dueDate') {
+      sortedTodoList = todos.sort(function(a, b) {
+        const keyA = new Date(a.dueDate);
+        
+        const keyB = new Date(b.dueDate);
+        console.log(keyB);
+        if (keyA < keyB) return -1;
+        if (keyA > keyB) return 1;
+        return 0;
+      });
+  }
+  
+  setTodos([...sortedTodoList]);
+}
+
   if (todos.length > 0) {
     return (
       <>
         <CreateToDo />
+
+        <label htmlFor="filter-method">Filter by:</label>
+          <select id="filter-method" name="filter-method" onChange={(e) => filterTodoList(e.target.value)}>
+            <option value="default">Default</option>
+            <option value="alphabetically">Alphabetically</option>
+            <option value="dueDate">Due date</option>
+          </select>
+
         <div className="todo-list">
           {todos.map(todo => <ToDoCard key={todo.id} todos={todos} setTodos={setTodos} id={todo.id} task={todo.task} completed={todo.completed} creationDate={todo.creationDate} dueDate={todo.dueDate} />)}
         </div>
