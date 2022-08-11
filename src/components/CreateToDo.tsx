@@ -21,10 +21,15 @@ function CreateToDo(): JSX.Element {
             Task:
             <input type="text" value={newTodo.task} onChange={(e) => setNewTodo({task: e.target.value, dueDate: newTodo.dueDate})}/>
         </label>
-        <label>
+        <label htmlFor="due-date">Due date:</label>
+            <input type="date" id="due-date" name="due-date"
+                value={newTodo.dueDate}
+                // min={Date.now()}
+                onChange={(e) => setNewTodo({task: newTodo.task, dueDate: e.target.value})}/>
+        {/* <label>
             Due date:
             <input type="text" value={newTodo.dueDate} onChange={(e) => setNewTodo({task: newTodo.task, dueDate: e.target.value})}/>
-        </label>
+        </label> */}
         <input type="submit" value="Submit"/>
     </form>
     )
