@@ -36,7 +36,7 @@ function ToDoCard({
 
   const baseUrl =
     process.env.NODE_ENV === "production"
-      ? "your-project.herokuapp.com"
+      ? "rosemelissa-todo.herokuapp.com"
       : "localhost:4000";
 
   const handleDelete = () => {
