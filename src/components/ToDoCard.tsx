@@ -36,21 +36,21 @@ function ToDoCard({
 
   const baseUrl =
     process.env.NODE_ENV === "production"
-      ? "rosemelissa-todo.herokuapp.com"
-      : "localhost:4000";
+      ? "https://rosemelissa-todo.herokuapp.com"
+      : "http://localhost:4000";
 
   const handleDelete = () => {
-    axios.delete(`http://${baseUrl}/items/${id}`);
+    axios.delete(`${baseUrl}/items/${id}`);
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   const handleMakeIncomplete = () => {
-    axios.patch(`http://${baseUrl}/items/${id}`, { completed: false });
+    axios.patch(`${baseUrl}/items/${id}`, { completed: false });
     setTodos(todos.map((todo) => changeCurrentTodoCompletion(todo)));
   };
 
   const handleMakeComplete = () => {
-    axios.patch(`http://${baseUrl}/items/${id}`, { completed: true });
+    axios.patch(`${baseUrl}/items/${id}`, { completed: true });
     setTodos(todos.map((todo) => changeCurrentTodoCompletion(todo)));
   };
 
@@ -69,7 +69,7 @@ function ToDoCard({
   };
 
   function handleUpdate() {
-    axios.patch(`http://${baseUrl}/items/${id}`, {
+    axios.patch(`${baseUrl}/items/${id}`, {
       task: currentTodo.task,
       dueDate: currentTodo.dueDate,
     });

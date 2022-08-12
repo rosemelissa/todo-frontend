@@ -9,11 +9,11 @@ function App(): JSX.Element {
 
   const baseUrl =
     process.env.NODE_ENV === "production"
-      ? "rosemelissa-todo.herokuapp.com"
-      : "localhost:4000";
+      ? "https://rosemelissa-todo.herokuapp.com"
+      : "http://localhost:4000";
 
   useEffect(() => {
-    fetch(`http://${baseUrl}/items/`)
+    fetch(`${baseUrl}/items/`)
       .then((response) => response.json())
       .then((jsonBody: FullToDoItem[]) => setTodos(jsonBody));
   }, [baseUrl]);
@@ -51,7 +51,7 @@ function App(): JSX.Element {
   }
 
   function handleShowOverdue() {
-    fetch(`http://${baseUrl}/items/`)
+    fetch(`${baseUrl}/items/`)
       .then((response) => response.json())
       .then((jsonBody: FullToDoItem[]) => setTodos(jsonBody));
     setShowOverdue(true);
