@@ -13,11 +13,11 @@ function CreateToDo(): JSX.Element {
   });
   const baseUrl =
     process.env.NODE_ENV === "production"
-      ? "rosemelissa-todo.herokuapp.com"
-      : "localhost:4000";
+      ? "https://rosemelissa-todo.herokuapp.com"
+      : "http://localhost:4000";
 
   const handleSubmit = () => {
-    axios.post(`http://${baseUrl}/items`, newTodo);
+    axios.post(`${baseUrl}/items`, newTodo);
   };
 
   return (
