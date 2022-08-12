@@ -7,11 +7,15 @@ function App(): JSX.Element {
   const [todos, setTodos] = useState<FullToDoItem[]>([]);
   const [showOverdue, setShowOverdue] = useState<boolean>(true);
 
+  const baseUrl = process.env.NODE_ENV === "production"
+	? "your-project.herokuapp.com"
+	: "localhost:4000"
+
   useEffect(() => {
-    fetch(`http://localhost:4000/items/`)
+    fetch(`http://${baseUrl}/items/`)
     .then((response) => response.json())
     .then((jsonBody: FullToDoItem[]) => setTodos(jsonBody))
-  }, [])
+  }, [baseUrl])
   
 function filterTodoList(method: string) {
   let sortedTodoList: FullToDoItem[] = [...todos];
@@ -46,7 +50,7 @@ function filterTodoList(method: string) {
 }
 
   function handleShowOverdue() {
-    fetch(`http://localhost:4000/items/`)
+    fetch(`http://${baseUrl}/items/`)
     .then((response) => response.json())
     .then((jsonBody: FullToDoItem[]) => setTodos(jsonBody))
     setShowOverdue(true);

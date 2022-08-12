@@ -8,9 +8,13 @@ interface ToDoInputs {
 
 function CreateToDo(): JSX.Element {
     const [newTodo, setNewTodo] = useState<ToDoInputs>({task: '', dueDate: new Date().toISOString().slice(0, 10)});
-    
+    const baseUrl = process.env.NODE_ENV === "production"
+	? "your-project.herokuapp.com"
+	: "localhost:4000"
+
+
     const handleSubmit = () => {
-        axios.post("http://localhost:4000/items", newTodo);
+        axios.post(`http://${baseUrl}/items`, newTodo);
     }
 
     return(
