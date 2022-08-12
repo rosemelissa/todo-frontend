@@ -4,7 +4,8 @@ import ToDoCard from "./components/ToDoCard";
 import { FullToDoItem } from './components/types';
 
 function App(): JSX.Element {
-  const [todos, setTodos] = useState<FullToDoItem[]>([])
+  const [todos, setTodos] = useState<FullToDoItem[]>([]);
+  const [showOverdue, setShowOverdue] = useState<boolean>(true);
 
   useEffect(() => {
     fetch(`http://localhost:4000/items/`)
@@ -41,9 +42,21 @@ function filterTodoList(method: string) {
         return 0;
       });
   }
-  
   setTodos([...sortedTodoList]);
 }
+
+  function handleShowOverdue() {
+    fetch(`http://localhost:4000/items/`)
+    .then((response) => response.json())
+    .then((jsonBody: FullToDoItem[]) => setTodos(jsonBody))
+    setShowOverdue(true);
+  }
+
+  function handleHideOverdue() {
+    const dateToday: string = new Date().toISOString().slice(0, 10);
+    setTodos(todos.filter((todo) => todo.dueDate >= dateToday));
+    setShowOverdue(false);
+  }
 
   if (todos.length > 0) {
     return (
@@ -56,7 +69,12 @@ function filterTodoList(method: string) {
             <option value="alphabetically">Alphabetically</option>
             <option value="dueDate">Due date</option>
           </select>
-
+          <label>
+            Show overdue todos?
+            {showOverdue 
+                ? <input type="checkbox" checked onClick={handleHideOverdue}/> 
+                : <input type="checkbox" onClick={handleShowOverdue}/>}
+          </label>
         <div className="todo-list">
           {todos.map(todo => <ToDoCard key={todo.id} todos={todos} setTodos={setTodos} id={todo.id} task={todo.task} completed={todo.completed} creationDate={todo.creationDate} dueDate={todo.dueDate} />)}
         </div>
