@@ -58,7 +58,7 @@ function filterTodoList(method: string) {
 
   function handleHideOverdue() {
     const dateToday: string = new Date().toISOString().slice(0, 10);
-    setTodos(todos.filter((todo) => todo.dueDate >= dateToday));
+    setTodos(todos.filter((todo) => (todo.dueDate >= dateToday) || (todo.dueDate === '')));
     setShowOverdue(false);
   }
 
